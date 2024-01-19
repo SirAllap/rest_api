@@ -2,6 +2,7 @@ import { Router, NextFunction, Request, Response } from 'express'
 import { IBook } from '../interfaces/books.interface'
 import { bookServices } from '../services/books.service'
 import { IError } from '../interfaces/error.interface'
+import mongoose from 'mongoose'
 
 export const BooksController = Router()
 
@@ -16,7 +17,6 @@ BooksController.get(
 			const result = await bookServices.getAllBooks()
 			res.json(result)
 		} catch (error) {
-			console.error(error)
 			return res
 				.status(404)
 				.json({ error: true, message: 'No books found', status: 404 })
@@ -33,10 +33,18 @@ BooksController.get(
 		next: NextFunction
 	) => {
 		try {
+			const bookID = req.params.bookID
+
+			if (!mongoose.Types.ObjectId.isValid(bookID)) {
+				return res.status(400).json({
+					error: true,
+					message: 'Invalid book ID format',
+					status: 400,
+				})
+			}
 			const result = await bookServices.getBookByID(req.params.bookID)
 			res.json(result)
 		} catch (error) {
-			console.error(error)
 			return res.status(404).json({
 				error: true,
 				message: 'No book found with that ID',
@@ -54,7 +62,6 @@ BooksController.post(
 			const result = await bookServices.createOneBook(req.body)
 			res.json(result)
 		} catch (error: any) {
-			console.error(error.message)
 			if (error.name === 'ValidationError')
 				return res.status(400).json({
 					error: true,
@@ -80,7 +87,6 @@ BooksController.put(
 			)
 			res.json(result)
 		} catch (error) {
-			console.error(error)
 			return res.status(404).json({
 				error: true,
 				message: 'Error updating the book info',
@@ -102,7 +108,6 @@ BooksController.delete(
 			const result = await bookServices.deleteOneBook(req.params.bookID)
 			res.json(result)
 		} catch (error) {
-			console.error(error)
 			return res.status(404).json({
 				error: true,
 				message: 'Error deleting the book',
