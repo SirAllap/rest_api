@@ -12,13 +12,12 @@ export const app: Express = express()
 	.use(cors())
 	.use(express.json())
 	.use(morgan('combined'))
-	.use('/', (_req: Request, res: Response) => {
-		res.send('Hello World!')
-	})
 	.use('/books', BooksController)
 	.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 		console.error(err)
-		return res
-			.status(500)
-			.json({ error: true, message: 'Unexpected Error' })
+		return res.status(500).json({
+			error: true,
+			message: 'Internal server error',
+			status: 500,
+		})
 	})
