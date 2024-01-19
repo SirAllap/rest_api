@@ -1,0 +1,20 @@
+service: rest_api_bolsover
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  environment:
+    MONGO_URI: ${file(.env.json):MONGO_URI}
+    MONGO_DB: ${file(.env.json):MONGO_DB}
+
+functions:
+  api:
+    handler: src/lambda.handler
+    events:
+      - httpApi: "*"
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
