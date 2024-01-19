@@ -1,6 +1,7 @@
-# API Endpoints
+# API URL:
+- https://qfe3fqkegj.execute-api.eu-west-1.amazonaws.com
 
-### API Info Endpoint
+### API Endpoint
 
 | METHOD | ENDPOINT      | DESCRIPTION   | POST PARAMS | RETURNS                         |
 | ------ | ------------- | ------------- | ----------- | ------------------------------- |
