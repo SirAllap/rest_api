@@ -1,3 +1,4 @@
+import { IBook } from '../interfaces/books.interface'
 import { BookModel } from '../models/book.model'
 
 const getAllBooks = async () => {
@@ -8,4 +9,12 @@ const getAllBooks = async () => {
 	return result
 }
 
-export const bookServices = { getAllBooks }
+const createOneBook = async (book: IBook) => {
+	const result = await BookModel.create(book)
+	return result
+}
+
+export const bookServices = {
+	getAllBooks,
+	createOneBook,
+}
