@@ -3,6 +3,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import 'dotenv/config'
 import connectDB from './util/db_connection'
+import { BooksController } from './controllers/books.controller'
 
 connectDB()
 
@@ -14,6 +15,7 @@ export const app: Express = express()
 	.use('/', (_req: Request, res: Response) => {
 		res.send('Hello World!')
 	})
+	.use('/books', BooksController)
 	.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
 		console.error(err)
 		return res
