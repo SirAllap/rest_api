@@ -22,8 +22,19 @@ const createOneBook = async (book: IBook) => {
 	return result
 }
 
+const updateOneBook = async (bookID: string, update: Partial<IBook>) => {
+	const result = await BookModel.findByIdAndUpdate(bookID, update, {
+		new: true,
+	})
+	if (!result) {
+		throw new Error()
+	}
+	return result
+}
+
 export const bookServices = {
 	getAllBooks,
 	createOneBook,
 	getBookByID,
+	updateOneBook,
 }

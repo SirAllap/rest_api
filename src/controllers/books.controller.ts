@@ -65,3 +65,28 @@ BooksController.post(
 		}
 	}
 )
+
+BooksController.put(
+	'/:bookID',
+	async (
+		req: Request<{ bookID: string }>,
+		res: Response,
+		next: NextFunction
+	) => {
+		try {
+			const result = await bookServices.updateOneBook(
+				req.params.bookID,
+				req.body
+			)
+			res.json(result)
+		} catch (error) {
+			console.error(error)
+			return res.status(404).json({
+				error: true,
+				message: 'Error updating the book info',
+				status: 404,
+			})
+		}
+		return next()
+	}
+)
