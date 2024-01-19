@@ -2,7 +2,7 @@
 	"name": "rest_api",
 	"version": "1.0.0",
 	"description": "",
-	"main": "app.ts",
+	"main": "dist/app.js",
 	"scripts": {
 		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\"",
 		"build": "rimraf dist && tsc",
