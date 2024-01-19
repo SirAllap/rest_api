@@ -10,6 +10,10 @@
 		"deploy": "npm run build && serverless deploy --force",
 		"start": "sls offline start"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SirAllap/rest_api"
+	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
