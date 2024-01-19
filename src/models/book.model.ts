@@ -8,4 +8,4 @@ const bookSchema = new Schema<IBook>({
 	price: { type: Number, required: true },
 })
 
-export const BookModel = model<IBook>('bookings', bookSchema)
+export const BookModel = model<IBook>('books', bookSchema)

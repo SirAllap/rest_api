@@ -1,4 +1,4 @@
-service: rest_api_bolsover
+service: rest-api-bolsover
 frameworkVersion: "3"
 
 provider:
