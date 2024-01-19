@@ -90,3 +90,25 @@ BooksController.put(
 		return next()
 	}
 )
+
+BooksController.delete(
+	'/:bookID',
+	async (
+		req: Request<{ bookID: string }>,
+		res: Response,
+		next: NextFunction
+	) => {
+		try {
+			const result = await bookServices.deleteOneBook(req.params.bookID)
+			res.json(result)
+		} catch (error) {
+			console.error(error)
+			return res.status(404).json({
+				error: true,
+				message: 'Error deleting the book',
+				status: 404,
+			})
+		}
+		return next()
+	}
+)
