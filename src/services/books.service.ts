@@ -9,6 +9,14 @@ const getAllBooks = async () => {
 	return result
 }
 
+const getBookByID = async (bookID: string) => {
+	const result = await BookModel.findById(bookID)
+	if (!result) {
+		throw new Error()
+	}
+	return result
+}
+
 const createOneBook = async (book: IBook) => {
 	const result = await BookModel.create(book)
 	return result
@@ -17,4 +25,5 @@ const createOneBook = async (book: IBook) => {
 export const bookServices = {
 	getAllBooks,
 	createOneBook,
+	getBookByID,
 }

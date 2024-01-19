@@ -25,6 +25,28 @@ BooksController.get(
 	}
 )
 
+BooksController.get(
+	'/:bookID',
+	async (
+		req: Request<{ bookID: string }>,
+		res: Response<IBook | IError>,
+		next: NextFunction
+	) => {
+		try {
+			const result = await bookServices.getBookByID(req.params.bookID)
+			res.json(result)
+		} catch (error) {
+			console.error(error)
+			return res.status(404).json({
+				error: true,
+				message: 'No book found with that ID',
+				status: 404,
+			})
+		}
+		return next()
+	}
+)
+
 BooksController.post(
 	'/',
 	async (req: Request<IBook>, res: Response, next: NextFunction) => {
