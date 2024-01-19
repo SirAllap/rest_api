@@ -24,3 +24,22 @@ BooksController.get(
 		return next()
 	}
 )
+
+BooksController.post(
+	'/',
+	async (req: Request<IBook>, res: Response, next: NextFunction) => {
+		try {
+			const result = await bookServices.createOneBook(req.body)
+			res.json(result)
+		} catch (error: any) {
+			console.error(error.message)
+			if (error.name === 'ValidationError')
+				return res.status(400).json({
+					error: true,
+					message: error.message,
+					status: 400,
+				})
+			return next()
+		}
+	}
+)
